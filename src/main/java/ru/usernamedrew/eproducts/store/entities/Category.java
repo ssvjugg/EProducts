@@ -5,14 +5,14 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.math.BigDecimal;
+import java.util.Set;
 
 @Entity
-@Table(name = "products")
+@Table(name = "categories")
 @Getter
 @Setter
 @EqualsAndHashCode
-public class Product {
+public class Category {
     @Id
     @GeneratedValue
     private Long id;
@@ -20,12 +20,9 @@ public class Product {
     @Column(nullable = false)
     private String name;
 
-    @Column(length = 5000)
+    @Column(length = 1000)
     private String description;
 
-    @Column(nullable = false)
-    private BigDecimal price;
-
-    @ManyToOne(optional = false)
-    private Category category;
+    @OneToMany(mappedBy = "category")
+    private Set<Product> products;
 }
